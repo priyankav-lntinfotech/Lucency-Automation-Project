@@ -20,10 +20,11 @@ public class Login {
 	}
 
 	
-	@Given("^I navigate to login page$")
+	@Given("^Open Lucency site and navigate to login page$")
 	public void i_navigate_to_login_page() throws Throwable {
 		loginPage = context.getPageObjectManager().getLogingPage();
-		Assert.assertEquals("Login page not found", context.getPageTitle(), "Lucency");
+		Assert.assertEquals("Login page not found", context.getPageTitle(), "Making Marketing and Contact Centers More Profitable - Lucency Technologies");
+		loginPage.clickHomeLogin();
 	}
 
 	@When("^I enter email and password$")
@@ -39,7 +40,8 @@ public class Login {
 	@Then("^I should see the Home page$")
 	public void i_should_see_the_Home_page() throws Throwable {
 		homePage = context.getPageObjectManager().getHomePage();
-		Assert.assertEquals("Home page title does not match", homePage.getHomePageTitle(), "Home");
+		Assert.assertEquals("Dashboard menu doesn't exists", homePage.verifyDashboard(), "Dashboard");
+		
 	}
 	
 	@When("^I enter email as \"([^\"]*)\" and password as \"([^\"]*)\"$")
@@ -50,7 +52,8 @@ public class Login {
 	
 	@Then("^I should see the Login page with error message$")
 	public void verifyIncorrectLogin() throws Throwable {
-		Assert.assertEquals("Login page error messafe text does not match",loginPage.getErrorMessageText(),"Invalid email or password.");
+		Assert.assertEquals("Login page error message text does not match",loginPage.getErrorMessageText(),"Either email or password invalid.");
+		
 	}
 
 }

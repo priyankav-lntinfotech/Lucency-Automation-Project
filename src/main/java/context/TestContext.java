@@ -63,7 +63,9 @@ public class TestContext {
 	}
 
 	public String getPageTitle() {
+		System.out.println(getDriver().getTitle());
 		return getDriver().getTitle();
+		
 	}
 	
 	public void enterURL() {

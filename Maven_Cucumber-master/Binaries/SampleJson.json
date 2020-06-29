@@ -1,0 +1,16 @@
+{    "ip": "172.21.31.12",
+	"quiz": {
+        "sport": {
+            "q1": {
+                "question": "10'x15' Medium",
+                "options": [
+                    "New York Bulls",
+                    "Los Angeles Kings",
+                    "Golden State Warriros",
+                    "Huston Rocket"
+                ],
+                "answer": "Huston Rocket"
+            }
+        }
+	}
+}

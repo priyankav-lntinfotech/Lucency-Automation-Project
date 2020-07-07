@@ -1,11 +1,11 @@
 Feature: Login Feature
   This feature deals with the login functionality of Lucency Application
 
-#  Scenario: Login with correct username and password
-#    Given Open Lucency site and navigate to login page
- #   When I enter email and password
-  #  And I click on login button
-   # Then I should see the Home page
+ Scenario: Login with correct username and password
+  Given Open Lucency site and navigate to login page
+  When I enter email and password
+  And I click on login button
+  Then I should see the Home page
 
  Scenario: Check Login with incorrect parameters
   Given Open Lucency site and navigate to login page
@@ -13,12 +13,3 @@ Feature: Login Feature
   And I click on login button
   Then I should see the Login page with error message
 
-  #Scenario Outline: Title of your scenario outline
-    #Given I want to write a step with <name>
-    #When I check for the <value> in step
-    #Then I verify the <status> in step
-#
-    #Examples: 
-      #| name  | value | status  |
-      #| name1 |     5 | success |
-      #| name2 |     7 | Fail    |

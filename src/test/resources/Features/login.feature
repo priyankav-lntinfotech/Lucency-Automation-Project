@@ -3,9 +3,9 @@ Feature: Login Feature
 
  Scenario: Login with correct username and password
   Given Open Lucency site and navigate to login page
- When I enter email and password
- And I click on login button
-Then I should see the Home page
+  When I enter email and password
+  And I click on login button
+  Then I should see the Home page
 
  Scenario: Check Login with incorrect parameters
   Given Open Lucency site and navigate to login page

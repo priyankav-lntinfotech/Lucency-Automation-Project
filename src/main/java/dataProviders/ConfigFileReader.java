@@ -58,7 +58,7 @@ public class ConfigFileReader {
 	public String getApplicationUrl() {
 		String url = properties.getProperty("applicationURL");
 		if(url != null) {
-			return "https://www." + url;
+			return "https://" + url;
 		}
 		else {
 			throw new RuntimeException("url not specified in the Configuration.properties file.");

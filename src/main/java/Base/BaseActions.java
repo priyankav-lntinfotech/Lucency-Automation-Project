@@ -27,7 +27,9 @@ public abstract class BaseActions {
 	}
 	
 	 public WebElement findAnyElement(By locator){
-	        WebElement element = driver.findElement(locator);
+		 //   WebElement element = driver.findElement(locator);
+		 
+	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	        return element;
 	    }
 
@@ -206,6 +208,11 @@ public abstract class BaseActions {
 
 	public static String generateNewNumber(String name, int length) {
 		return name + RandomStringUtils.random(length, "172984757");
+	}
+	
+	public static String generateNewNumber(int length)
+	{
+		return RandomStringUtils.randomNumeric(length);
 	}
 
 	public static String generateEmail(String domain, int length) {

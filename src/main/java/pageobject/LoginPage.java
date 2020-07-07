@@ -57,6 +57,7 @@ public class LoginPage extends BaseActions
 	
 	public void enterEmailandPassword(String emailid, String pasword) throws Exception
 	{
+		
 		Thread.sleep(1000);
 		ajaxSendKeys(email, emailid);
 		
@@ -81,11 +82,13 @@ public class LoginPage extends BaseActions
 		return text;
 	}
 	
-	public void doValidLogin(String emailid, String pasword) 
+	public void doValidLogin(String emailid, String pasword) throws InterruptedException 
 	{
 		clickHomeLogin();
         
+		Thread.sleep(1000);
 		ajaxSendKeys(email, emailid);
+		Thread.sleep(1000);
 		ajaxSendKeys(password, pasword);
 		
 		clickSubmit();

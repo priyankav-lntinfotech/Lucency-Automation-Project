@@ -8,8 +8,9 @@ public class HomePage extends BaseActions{
 	
 	
 	By Dashboard = By.xpath("//SPAN[@class='f-title'][text()='Dashboard']");
-	
-	
+	By ProfileIcon = By.xpath("//div[@id='f-header-menu-account']");
+	public By AccountSettings = By.linkText("My Account Settings");
+		
 	
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -19,4 +20,14 @@ public class HomePage extends BaseActions{
 		return findAnyElement(Dashboard).getText();
 	}
 	
+	public void clickonProfileIcon()
+	{
+		clickElement(ProfileIcon);
+	}
+	
+	public void clickonAccountSettings()
+	{
+		//clickElementByText("My Account Settings", AccountSettings);
+		clickElement(AccountSettings);
+	}
 }

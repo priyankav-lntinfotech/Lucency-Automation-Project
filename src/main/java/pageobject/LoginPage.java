@@ -72,7 +72,7 @@ public class LoginPage extends BaseActions
 		{
 			Thread.sleep(1000);
 
-			text= driver.findElement(errorMsg).getText();
+			text= findAnyElement(errorMsg).getText();
 			System.out.println("Error message is:" + text);
 		} 
 		catch (Exception e)

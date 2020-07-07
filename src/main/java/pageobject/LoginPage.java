@@ -1,79 +1,96 @@
 package pageobject;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+//import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.remote.server.handler.ClickElement;
+//import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import Base.BaseActions;
 
-public class LoginPage {
 
-	
-	@FindBy(id="user_email")
-	WebElement email;
-	
-	@FindBy(id="user_password")
-	WebElement password;
+public class LoginPage extends BaseActions
+{
 
-	@FindBy(name="commit")
-	WebElement submit;
-	
-	@FindBy(xpath="//div[contains(@class,'alert-danger')]")
-	WebElement errorMsg;
+	By home_login = By.xpath("//button[text()='Login']");
+	By email = By.id("tooltip_auth_login_email");
+	By password = By.id("tooltip_auth_login_password");
+	By submit = By.xpath("//button[text()='Log In']");
+	By errorMsg=By.xpath("//div[@class='f-m-a f-w-280-m p-validate-error']");
+		
 
-	public LoginPage(WebDriver driver) {
-		PageFactory.initElements(driver, this);
-	}
-	
-	
-	public void enterEmail(String strEmail) {
+    public LoginPage(WebDriver driver)
+   {
+	   super(driver);
+		
+    }
+
+	public void clickHomeLogin()
+	{
 		try {
-				email.sendKeys(strEmail);
-				System.out.println("Entered Email");
-		}catch (Exception e) {
-			System.out.println("Email not entered");
+	
+			clickElement(home_login);
+		System.out.println("Login button clicked");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Login button not clicked");
 		}
 	}
 	
-	public void enterPassword(String strPassword) {
+
+	public void clickSubmit()
+	{
 		try {
-				password.sendKeys(strPassword);
-				System.out.println("Entered Password");
-		}catch (Exception e) {
-			System.out.println("Password not entered");
+				clickElement(submit);
+				System.out.println("Login popup button clicked");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Login popup button not clicked");
 		}
 	}
 	
-	public void clickSubmit() {
-		try {
-				submit.click();
-				System.out.println("Submit button clicked");
-		}catch (Exception e) {
-			System.out.println("Submit button not clicked");
-		}
+	public void enterEmailandPassword(String emailid, String pasword) throws Exception
+	{
+		Thread.sleep(1000);
+		ajaxSendKeys(email, emailid);
+		
+		Thread.sleep(1000);
+		ajaxSendKeys(password, pasword);
+		
+		System.out.println("Entered Email and Password on Login Popup");
 	}
 	
-	public void enterEmailandPassword(String email, String pasword) {
-		enterEmail(email);
-		enterPassword(pasword);
-		System.out.println("In enterEmailandPassword method");
-	}
-	
-	public String getErrorMessageText() throws Exception {
+	public String getErrorMessageText() 
+	{
+		
 		String text = null;
-		try {
-			text = errorMsg.getAttribute("innerText");
-		} catch (Exception e) {
-			System.out.println("Could not get Success message text");
-			throw (e);
+		try 
+		{
+			Thread.sleep(1000);
+
+			text= findAnyElement(errorMsg).getText();
+			System.out.println("Error message is:" + text);
+		} 
+		catch (Exception e)
+		{
+			System.out.println("Could not get error message text:" + e.toString());
+			
 		}
 		return text;
+		
 	}
 	
-	public void doValidLogin(String email, String pasword) {
-		enterEmail(email);
-		enterPassword(pasword);
+	public void doValidLogin(String emailid, String pasword) 
+	{
+		clickHomeLogin();
+        
+		ajaxSendKeys(email, emailid);
+		ajaxSendKeys(password, pasword);
+		
 		clickSubmit();
 	}
 

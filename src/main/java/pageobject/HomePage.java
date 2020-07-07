@@ -7,7 +7,7 @@ import Base.BaseActions;
 public class HomePage extends BaseActions{
 	
 	
-	By homePageTitle = By.xpath("//div[@class='caption']");
+	By Dashboard = By.xpath("//SPAN[@class='f-title'][text()='Dashboard']");
 	
 	
 	
@@ -15,8 +15,8 @@ public class HomePage extends BaseActions{
 		super(driver);
 	}
 	
-	public String getHomePageTitle() {
-		return findAnyElement(homePageTitle).getText();
+	public String verifyDashboard() {
+		return findAnyElement(Dashboard).getText();
 	}
 	
 }

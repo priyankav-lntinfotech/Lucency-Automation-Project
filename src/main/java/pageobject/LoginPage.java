@@ -14,12 +14,10 @@ import Base.BaseActions;
 public class LoginPage extends BaseActions
 {
 
-	WebDriver  driver;
-	
-	By home_login = By.xpath("//button[@class='a-button f-b pure-input-1 f-b-4A90E2-a f-b-4A90E2-h f-border-4A90E2 f-c-FFFFFF-a f-c-FFFFFF-h f-c-4A90E2 f-l-38 f-m-a f-r-20 f-s-16 f-w-90 f-600']");
+	By home_login = By.xpath("//button[text()='Login']");
 	By email = By.id("tooltip_auth_login_email");
 	By password = By.id("tooltip_auth_login_password");
-	By submit = By.xpath("//button[@class='a-button f-b f-b-293B50-a f-b-293B50-h f-b-4A90E2 f-c-FFFFFF f-h-40 f-l-40 f-m-a f-p-10-h f-r-20 f-s-14 f-w-175 f-600 pure-input-1'][text()='Log In']");
+	By submit = By.xpath("//button[text()='Log In']");
 	By errorMsg=By.xpath("//div[@class='f-m-a f-w-280-m p-validate-error']");
 		
 
@@ -67,19 +65,24 @@ public class LoginPage extends BaseActions
 		System.out.println("Entered Email and Password on Login Popup");
 	}
 	
-	public String getErrorMessageText() throws Exception 
+	public String getErrorMessageText() 
 	{
-		String text=null;
-		try {
+		
+		String text = null;
+		try 
+		{
 			Thread.sleep(1000);
-			//text = driver.findElement(errorMsg).getAttribute("name");
-			text= driver.findElement(errorMsg).getText().toString();
-			System.out.println(text);
-		} catch (Exception e) {
-			System.out.println("Could not get error message text");
-			throw (e);
+
+			text= findAnyElement(errorMsg).getText();
+			System.out.println("Error message is:" + text);
+		} 
+		catch (Exception e)
+		{
+			System.out.println("Could not get error message text:" + e.toString());
+			
 		}
 		return text;
+		
 	}
 	
 	public void doValidLogin(String emailid, String pasword) throws InterruptedException 

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import pageobject.CommonPageElements;
 import pageobject.HomePage;
 import pageobject.LoginPage;
+import pageobject.TestSessionPage;
 
 
 public class PageObjectManager {
@@ -13,6 +14,9 @@ public class PageObjectManager {
 	private WebDriver driver;
 
 	private CommonPageElements commonPageElement;
+	private TestSessionPage testSession;
+	
+	
 	
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -30,6 +34,10 @@ public class PageObjectManager {
 	
 	public CommonPageElements getCommonPageElements() {
 		return (commonPageElement == null) ? commonPageElement =  new CommonPageElements(driver) : commonPageElement;
+	}
+	
+	public TestSessionPage getTestSessionPage() {
+		return (testSession == null) ? testSession = new TestSessionPage(driver) : testSession;
 	}
 
 }

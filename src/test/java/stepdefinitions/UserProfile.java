@@ -87,10 +87,23 @@ public class UserProfile
 		Thread.sleep(1000);
 				
 		profile.Uploadpic();
-		System.out.println("Profile Info updated successfully..");
+		System.out.println("Profile Image uploaded successfully..");
 	    
 	}
 	
-
+	
+	@Then("Click on Edit icon and update new password")
+	public void click_on_Edit_icon_and_update_new_password() throws Exception
+	{
+		System.out.println("Click on Edit icon to update profile");
+		Thread.sleep(1000);
+		
+		String pswd = context.getConfigFileReader().getValidPassword();
+		profile.updatepassword(pswd);
+		System.out.println("Password updated successfully..");
+		
+	}
 	
 }
+	    
+

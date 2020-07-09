@@ -6,7 +6,7 @@ Feature: Title of your feature
 Scenario: To verify user details are saved and can upload Profile photo
     Given Login with an user and navigate to My Account Settings page
   	Then Click on Edit icon and update user details
-  	#Then Click on Edit icon and update new password
+  	Then Click on Edit icon and update new password
    	Then Upload Profile picture
 
 

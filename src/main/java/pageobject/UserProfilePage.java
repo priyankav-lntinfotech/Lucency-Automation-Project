@@ -1,5 +1,9 @@
 package pageobject;
 
+import java.io.File;
+import java.io.FileReader;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +27,8 @@ public class UserProfilePage extends BaseActions
 		super(driver);
 	}
 	
+	
+	
  //  WebDriver driver;
    
    public By Accounttext = By.xpath("//div[@id='page-1-1-inner']/h1[text()='My Account Settings']");
@@ -41,13 +47,21 @@ public class UserProfilePage extends BaseActions
 	By confirm_pswd = By.xpath("//input[@id='user_profile_edit_new_password_confirmation']");
 	
 	By cancel = By.xpath("//button[text()='Cancel']");
-	By save = By.xpath("//button[text()='Save']");
+	By save = By.xpath("//button[@class='f-bg-1 f-bold f-button f-c f-color-w f-h-40 f-lh-40 f-pad-1-h f-size-14 f-w-175 pure-input-1'][text()='Save']");
 	
 	/* Elements on Profile page */
 	public By emailid = By.xpath("//input[@id='user_email']");
 	public By firstname = By.xpath("//input[@id='first_name']");
 	public By lastname = By.xpath("//input[@id='last_name']");
 	public By phone = By.xpath("//input[@id='phone']");
+
+	/* Elements on Upload Profile Image*/
+	public By uploadimage = By.xpath("//span[@class='f-bold f-lh-18 f-size-14 f-title f-underline'][text()='Upload New Image']");
+	public By uploadfile = By.xpath("//input[@id='user_profile_upload_file']");
+	public By savefile = By.xpath("//button[text()='Save']");
+	String imagepath = "src/test/resources/FilesToUpload/profile.jpg";
+	
+	private File file;
 	
 	public void verifyAccountTitle()
 	{
@@ -65,10 +79,6 @@ public class UserProfilePage extends BaseActions
 	
 	public void updateprofiledetails() 
 	{
-		//wait.until(ExpectedConditions.elementToBeClickable(edit)).click();
-		
-		//driver.findElement(edit).click();
-		
 		ajaxClick(edit);
 		
 		try	
@@ -78,14 +88,17 @@ public class UserProfilePage extends BaseActions
 			{
 				System.out.println("Editing User Details");
 				
-				driver.findElement(edit_firstname).clear();
-				driver.findElement(edit_firstname).sendKeys(generateNewWord(7));
+				clearElement(edit_firstname);
+				String fname = generateNewWord(7);
+				setElementText(edit_firstname,fname);
 				
-				driver.findElement(edit_lastname).clear();
-				driver.findElement(edit_lastname).sendKeys(generateNewWord(7));
+				clearElement(edit_lastname);
+				String lname = generateNewWord(7);
+				setElementText(edit_lastname,lname);
 				
-				driver.findElement(edit_phone).clear();
-				driver.findElement(edit_phone).sendKeys(generateNewNumber(10));
+				clearElement(edit_phone);
+				String phone = generateNewNumber(10);
+				setElementText(edit_phone, phone);
 				
 				String Emailid = driver.findElement(email).getAttribute("value");
 				System.out.println("Logged in email id is:"+" "+Emailid);
@@ -106,12 +119,41 @@ public class UserProfilePage extends BaseActions
 		}
 	}
 	
-	public void Uploadpic()
+	public void Uploadpic() throws Exception
 	{
 		ajaxClick(edit);
 		
-		driver.findElement(By.xpath("//span[@class='f-bold f-lh-18 f-size-14 f-title f-underline'][text()='Upload New Image']")).click();
+		driver.findElement(uploadimage).click();
+		Thread.sleep(1000);
+		
+		String absolutepath = getAbsoultepathofFile(imagepath);
+		System.out.println("File path is: "+ absolutepath);
+		setElementText(uploadfile, absolutepath);
+		
+		Thread.sleep(1000);
+        ajaxClick(savefile);
+        System.out.println("Uploaded image");
+        
+        ajaxClick(save);
+	
+	}
+	
+	public void updatepassword(String pswd) throws Exception
+	{
+		ajaxClick(edit);
+		
+		setElementText(old_pswd, pswd);
+		
+		String newpassword = generateNewWord(3)+generateNewNumber(2)+"@"+(generateNewWord(2)).toUpperCase();
+		System.out.println("New Password is: "+ newpassword);
+		
+		setElementText(new_pswd, newpassword);
+		setElementText(confirm_pswd, newpassword);
+		
+		Thread.sleep(3000);
+		ajaxClick(save);
 		
 	}
 
 }
+;

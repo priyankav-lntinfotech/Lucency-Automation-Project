@@ -1,5 +1,6 @@
 package Base;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -32,6 +33,12 @@ public abstract class BaseActions {
 	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	        return element;
 	    }
+	 
+	 public void clearElement(By locator)
+	 {
+		 WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		 element.clear();
+	 }
 
 	public int getSizeListOfWebElements(By locator) {
 		List<WebElement> elements = driver.findElements(locator);
@@ -96,10 +103,10 @@ public abstract class BaseActions {
 		js.executeScript("arguments[0].value = '';", element);
 	}
 
-	public void ajaxClear(By locator) {
+	public void ajaxClear(By locator) 
+	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].value = '';", driver.findElement(locator));
-
 	}
 	
 	public void sendKeysWithAjax(By locator, String text) {
@@ -353,5 +360,13 @@ public abstract class BaseActions {
 			}
 		}
 	}
+	
+	public String getAbsoultepathofFile(String path)
+	{
+		File file = new File(path);
+		return path  = file.getAbsolutePath();
+		
+	}
+	
 
 }

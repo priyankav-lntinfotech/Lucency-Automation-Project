@@ -1,6 +1,7 @@
 package pageobject;
 
 import java.io.FileReader;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -49,13 +50,13 @@ public class TestSessionPage extends BaseActions{
 	By TextBoxPhone = By.xpath("//input[@id='rogue_session_search_phone_number']");
 	By SearchBtn = By.xpath("//button[@type='submit']");
 	By CodeResponse = By.xpath("//div[@id='code-response']/pre");		
-	By BtnEdit = By.xpath("(//span[text()='Edit'])[1]");
-	By BtnSave = By.xpath("//button[text()='Save']"); 
+	By Edit_TestSession = By.xpath("(//span[text()='Edit'])[1]");
+	By Save_Button = By.xpath("//button[text()='Save']"); 
 	By ExpirationDate_OnEditPage = By.xpath("//input[@id='test_session_edit_date']");		
 	By BtnDeleteTestSession = By.xpath("(//span[text()='Delete'])[1]");
 	By PopUp_DeleteTestSeeion = By.xpath("//button[text()='Delete']");
 	By PopUp_DeleteSuccess = By.xpath("(//I[@class='icon icon-close-4 f-abs-all'])[1]");
-	
+	By Copy_JSON = By.xpath("//textarea[@id='test_session_edit_data']");
 	
 	
 		
@@ -76,7 +77,8 @@ public class TestSessionPage extends BaseActions{
 		
 	public void btn_AddTestSession() throws Exception {
 		try {
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
+			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 			clickElement(AddTestSession);			
 			System.out.println("AddTestSession button clicked");
 		}catch (Exception e) {
@@ -123,7 +125,8 @@ public class TestSessionPage extends BaseActions{
 	
 	public void enter_SessionData() {		
 		try {			
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			clickElement(EnterSessionData);
 			FileReader reader = new FileReader("Binaries/SampleJson.json");			
 			JSONParser jsonpaser = new JSONParser();			
@@ -150,10 +153,12 @@ public class TestSessionPage extends BaseActions{
 	
 	public void successPopUp_Method() {		
 		try {			
-			Thread.sleep(2000);
+			//Thread.sleep(2000);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			if (!driver.findElement(Model_Msg).getText().equals("Error!")) {
 				System.out.println("Test Session Successflly Created......"+ driver.findElement(Model_Msg).getText());
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				clickElement(SuccessPopUp_CloseBtn);
 		    	System.out.println("SuccessPopUp_Close Btn clicked......");				
 		     }else {		    	 
@@ -167,15 +172,29 @@ public class TestSessionPage extends BaseActions{
 		
 	}
 	
+	public void edit_TestSession_Method() throws Exception {
+		try {
+			//Thread.sleep(2000);
+			clickElement(Edit_TestSession);
+			Thread.sleep(1000);
+			driver.findElement(Copy_JSON).getText();
+			clickElement(Save_Button);
+			clickElement(SuccessPopUp_CloseBtn);
+		}catch (Exception e) {
+			System.out.println("");
+			throw (e);
+		}
+	}
+	
 	
 	public void delete_Test_Session_Method() {		
 		try {
-			Thread.sleep(2000);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			clickElement(BtnDeleteTestSession);			
 			System.out.println("Delete_Test_Session Button clicked......");			
 			clickElement(PopUp_DeleteTestSeeion);
 			System.out.println("Delete_Test_Session Pop-UP's Delete Button clicked......");
-			Thread.sleep(500);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			clickElement(PopUp_DeleteSuccess);
 			System.out.println("Delete_Test_Session Success Pop_UP Closed......");
 		}catch (Exception e) {

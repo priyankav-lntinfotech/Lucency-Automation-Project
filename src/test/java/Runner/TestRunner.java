@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 				features="src/test/resources/Features",
 				glue={"stepdefinitions"},
 				plugin = { "pretty", "html:target/site/cucumber-pretty", "json:target/cucumber.json","junit:target/cucumber.xml"},
-				tags = "@TestSession"
+				tags = "@Authentication"
 		)
 @RunWith(Cucumber.class)
 public class TestRunner {

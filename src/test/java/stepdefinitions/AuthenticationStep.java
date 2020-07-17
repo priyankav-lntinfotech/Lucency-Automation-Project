@@ -43,15 +43,12 @@ private TestContext context;
 		   System.out.println("Inside agentPop_SideMenu_Method..........");
 	   }catch (Exception e) {
 		   System.out.println("Agent_Pop Side_Menu Not Found............");
-	   }
-		
-		
+	   }		
 	}
 
 	@Then("click on Authentication")
 	public void click_on_Authentication() {
-	    try {
-	    	Thread.sleep(3000);
+	    try {	    	
 	    	authentication.authentication_Sub_Menu_Method();
 	    	System.out.println("Inside click_on_Authentication Stepdefinition Method.........");
 	    }catch (Exception e) {
@@ -61,8 +58,7 @@ private TestContext context;
 
 	@Then("click on Add Address")
 	public void click_on_Add_Address() throws Exception{
-		try {
-	    	Thread.sleep(3000);
+		try {	    	
 	    	authentication.authentication_Add_Address_Method();
 	    	System.out.println("Add_Address Stepdefinition Method.........");
 	    }catch (Exception e) {
@@ -72,25 +68,18 @@ private TestContext context;
 	
 	@Then("add IP Address and Label")
 	public void add_IP_Address_and_Label() throws Exception {
-		try {
-	    	Thread.sleep(3000);
-	    	authentication.authentication_Enter_IP_Address();
-	    	
-	    	Thread.sleep(1000);
-	    	authentication.authentication_Enter_Label();
-	    	
+		try {	    	
+	    	authentication.authentication_Enter_IP_Address();	 	    	
+	    	authentication.authentication_Enter_Label();	    	
 	    }catch (Exception e) {
 	    	System.out.println("add IP_Address and Label Stepdefinition Method Not Found.........");
-	    }
-	    
+	    }	    
 	}	
 
 	@Then("click on Save")
 	public void click_on_Save() {
-	    try {
-	    	Thread.sleep(3000);
-	    	authentication.authentication_Click_SaveButton();
-	    	Thread.sleep(4000);
+	    try {	    	
+	    	authentication.authentication_Click_SaveButton();	    	
 	    	authentication.authentication_Close_Success_PopUp();
 	    }catch(Exception e) {
 	    	System.out.println("Click On Save Stepdefinition Not found...........");
@@ -100,14 +89,10 @@ private TestContext context;
 	
 	@Then("Edit IP Address")
 	public void edit_IP_Address() {
-		 try {
-		    	Thread.sleep(3000);
-		    	authentication.authentication_Edit_IP_Address();
-		    	Thread.sleep(4000);
-		    	authentication.authentication_Update_Label();
-		    	Thread.sleep(2000);
-		    	authentication.authentication_Click_SaveButton();
-		    	Thread.sleep(2000);
+		 try {		    	
+		    	authentication.authentication_Edit_IP_Address();		    	
+		    	authentication.authentication_Update_Label();		    	
+		    	authentication.authentication_Click_SaveButton();		    	
 		    	authentication.authentication_Close_Success_PopUp();
 		    }catch(Exception e) {
 		    	System.out.println("Click On Save Stepdefinition Not found...........");
@@ -116,17 +101,13 @@ private TestContext context;
 
 	@Then("Delete the IP Address")
 	public void delete_the_IP_Address() {
-		try {
-	    	Thread.sleep(3000);
-	    	authentication.authentication_Delete_IP_Address();
-	    	Thread.sleep(3000);
-	    	authentication.authentication_Delete_Confirmation_PopUP();
-	    	Thread.sleep(3000);
+		try {	    	
+	    	authentication.authentication_Delete_IP_Address();	    	
+	    	authentication.authentication_Delete_Confirmation_PopUP();	    	
 	    	authentication.authentication_Close_Success_PopUp();
 	    }catch(Exception e) {
 	    	System.out.println("Click On Save Stepdefinition Not found...........");
 	    }
-	}
-	
+	}	
 	
 }

@@ -39,22 +39,11 @@ private TestContext context;
 		}
 		
 	}
-
-	/*@Then("click on Developer")
-	public void click_on_DevTools() {
-	    try {
-	    	session.linkDevTools();
-	    	System.out.println("DevTools link clicked.....");
-	    }catch (Exception e) {
-	    	System.out.println("DevTools link not clicked.....");
-	    }
-	}*/
-
+	
 	@Then("click on Test Session")
 	public void click_on_Test_Session() {
 		try {
-			System.out.println("In side Test session method");
-			Thread.sleep(1000);
+			System.out.println("In side Test session method");			
 			session.linkTestSession();	    	
 	    	System.out.println("TestSessions link clicked.....");
 	    }catch (Exception e) {
@@ -64,54 +53,41 @@ private TestContext context;
 
 	@Then("click on Add Test Session button")
 	public void click_on_Add_Test_Session_button() throws Exception {
-		Thread.sleep(2000);
-	    session.btn_AddTestSession();
-	    Thread.sleep(3000);
+		Thread.sleep(1000);
+	    session.btn_AddTestSession();	    
 	}
 
 	@Then("select Campaign and Expiration date")
-	public void select_Campaign_and_Expiration_date() throws Exception {
-	    Thread.sleep(2000);
+	public void select_Campaign_and_Expiration_date() throws Exception {	   
 	    session.dropDown_SelectCampaign();
-	    System.out.println("Campaign selected from the drop-down list.........................");
-	    Thread.sleep(2000);
+	    System.out.println("Campaign selected from the drop-down list.........................");	    
 	    session.select_ExpirationDate();
 	    System.out.println("Exp Date selected from the calender..........");
 	}
 
 	@Then("select number")
-	public void select_number() throws Exception {
-	    Thread.sleep(2000);
+	public void select_number() throws Exception {	    
 	    session.select_Numbers();
 	    System.out.println("Number selected from the list.................");
 	}
 
 	@Then("add session data")
-	public void add_session_data() throws Throwable {
-	    Thread.sleep(2000);
+	public void add_session_data() throws Throwable {	    
 	    session.enter_SessionData();
 	    System.out.println("Session data entered.......................");
 	}
 
 	@Then("click on Create button")
-	public void click_on_Create_button() throws Exception {
-	    Thread.sleep(2000);
+	public void click_on_Create_button() throws Exception {	    
 	    session.btn_Create_Method();
-	    System.out.println("Create button clicked.................");
-	    Thread.sleep(2000);
+	    System.out.println("Create button clicked.................");	    
 	    session.successPopUp_Method();
-	    System.out.println("Success pop up closed...............");
-	    Thread.sleep(2000);
+	    System.out.println("Success pop up closed...............");	    
 	}
 	
 	@Then("Delete the created Test Session")
-	public void Delete_the_created_Test_Session() throws Exception {
-	    Thread.sleep(3000);
-	    session.delete_Test_Session_Method();
-	    System.out.println("Inside Deleting Test Session.................");
-	    Thread.sleep(2000);
-	    session.successPopUp_Method();
-	    System.out.println("Deleting Test Session Method Not Found..............");
+	public void Delete_the_created_Test_Session() throws Exception {	    
+	    session.delete_Test_Session_Method();	    
 	}
 
 

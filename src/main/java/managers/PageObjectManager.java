@@ -1,9 +1,12 @@
 package managers;
 
 import org.openqa.selenium.WebDriver;
+
+import pageobject.AuthenticationPage;
 import pageobject.CommonPageElements;
 import pageobject.HomePage;
 import pageobject.LoginPage;
+
 
 
 public class PageObjectManager {
@@ -13,6 +16,9 @@ public class PageObjectManager {
 	private WebDriver driver;
 
 	private CommonPageElements commonPageElement;
+	
+	private AuthenticationPage ipAddress;
+	
 	
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -30,6 +36,12 @@ public class PageObjectManager {
 	
 	public CommonPageElements getCommonPageElements() {
 		return (commonPageElement == null) ? commonPageElement =  new CommonPageElements(driver) : commonPageElement;
+	}
+	
+	
+	
+	public AuthenticationPage getAuthenticationPage() {
+		return (ipAddress == null) ? ipAddress = new AuthenticationPage(driver) : ipAddress;
 	}
 
 }

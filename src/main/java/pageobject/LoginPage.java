@@ -55,10 +55,10 @@ public class LoginPage extends BaseActions
 	
 	public void enterEmailandPassword(String emailid, String pasword) throws Exception
 	{
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		ajaxSendKeys(email, emailid);
 		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		ajaxSendKeys(password, pasword);
 		
 		System.out.println("Entered Email and Password on Login Popup");
@@ -84,10 +84,10 @@ public class LoginPage extends BaseActions
 		
 	}
 	
-	public void doValidLogin(String emailid, String pasword) 
+	public void doValidLogin(String emailid, String pasword) throws Exception 
 	{
 		clickHomeLogin();
-        
+        Thread.sleep(3000);
 		ajaxSendKeys(email, emailid);
 		ajaxSendKeys(password, pasword);
 		

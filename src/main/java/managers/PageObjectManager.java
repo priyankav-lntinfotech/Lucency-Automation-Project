@@ -6,7 +6,6 @@ import pageobject.AuthenticationPage;
 import pageobject.CommonPageElements;
 import pageobject.HomePage;
 import pageobject.LoginPage;
-import pageobject.TestSessionPage;
 
 
 
@@ -17,7 +16,7 @@ public class PageObjectManager {
 	private WebDriver driver;
 
 	private CommonPageElements commonPageElement;
-	private TestSessionPage testSession;
+	
 	private AuthenticationPage ipAddress;
 	
 	
@@ -39,9 +38,7 @@ public class PageObjectManager {
 		return (commonPageElement == null) ? commonPageElement =  new CommonPageElements(driver) : commonPageElement;
 	}
 	
-	public TestSessionPage getTestSessionPage() {
-		return (testSession == null) ? testSession = new TestSessionPage(driver) : testSession;
-	}
+	
 	
 	public AuthenticationPage getAuthenticationPage() {
 		return (ipAddress == null) ? ipAddress = new AuthenticationPage(driver) : ipAddress;

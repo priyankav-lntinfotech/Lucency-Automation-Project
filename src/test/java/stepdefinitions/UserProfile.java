@@ -10,8 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context.TestContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pageobject.HomePage;
 import pageobject.LoginPage;
 import pageobject.UserProfilePage;
@@ -27,9 +29,6 @@ public class UserProfile
 	private HomePage homePage;
 	private UserProfilePage profile;
 	private BaseActions base;
-	
-	WebDriver driver;
-	WebDriverWait wait;
 	
 	public UserProfile(TestContext context) {
 		this.context = context;
@@ -69,31 +68,28 @@ public class UserProfile
 		}
 	}
 	
-	@Then("^Click on Edit icon and update user details$")
-	public void then_click_on_edit_icon_and_update_user_details() throws Exception 
+	@When("Click on Edit icon to update user details, password, profile pic")
+	public void click_on_Edit_icon_to_update_user_details_password_profile_pic() throws Exception
 	{
 		System.out.println("Click on Edit icon to update profile");
 		Thread.sleep(1000);
-				
+		
+		profile.Editclick();
+		System.out.println("Open in edit mode..");
+	}
+
+	@Then("update user details")
+	public void update_user_details() throws Exception 
+	{
+		System.out.println("Click on Edit icon to update profile");
+		Thread.sleep(1000);
+		
 		profile.updateprofiledetails();
 		System.out.println("Profile Info updated successfully..");
-		
 	}
-	
-	@Then("^Upload Profile picture$")
-	public void upload_profile_picture() throws Exception 
-	{
-		System.out.println("Click on Edit icon to update Profile image");
-		Thread.sleep(1000);
-				
-		profile.Uploadpic();
-		System.out.println("Profile Image uploaded successfully..");
-	    
-	}
-	
-	
-	@Then("Click on Edit icon and update new password")
-	public void click_on_Edit_icon_and_update_new_password() throws Exception
+
+	@And("update password")
+	public void update_password() throws Exception 
 	{
 		System.out.println("Click on Edit icon to update profile");
 		Thread.sleep(1000);
@@ -101,9 +97,20 @@ public class UserProfile
 		String pswd = context.getConfigFileReader().getValidPassword();
 		profile.updatepassword(pswd);
 		System.out.println("Password updated successfully..");
-		
 	}
-	
+
+	@And("upload Profile picture")
+	public void upload_Profile_picture() throws Exception 
+	{
+		System.out.println("Click on Edit icon to update Profile image");
+		Thread.sleep(1000);
+				
+		profile.Uploadpic();
+		System.out.println("Profile Image uploaded successfully..");
+	}
+
+
+
 }
 	    
 

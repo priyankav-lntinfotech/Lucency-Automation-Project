@@ -79,8 +79,6 @@ public class UserProfilePage extends BaseActions
 	
 	public void updateprofiledetails() 
 	{
-		ajaxClick(edit);
-		
 		try	
 		{
 	        
@@ -121,7 +119,7 @@ public class UserProfilePage extends BaseActions
 	
 	public void Uploadpic() throws Exception
 	{
-		ajaxClick(edit);
+		Editclick();
 		
 		driver.findElement(uploadimage).click();
 		Thread.sleep(1000);
@@ -140,7 +138,7 @@ public class UserProfilePage extends BaseActions
 	
 	public void updatepassword(String pswd) throws Exception
 	{
-		ajaxClick(edit);
+		Editclick();
 		
 		setElementText(old_pswd, pswd);
 		
@@ -155,5 +153,9 @@ public class UserProfilePage extends BaseActions
 		
 	}
 
+	public void Editclick()
+	{
+		ajaxClick(edit);
+	}
 }
 ;

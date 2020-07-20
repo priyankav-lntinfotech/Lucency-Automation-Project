@@ -23,7 +23,7 @@ public class TestSessionPage extends BaseActions{
 	public TestSessionPage(WebDriver driver) {
 		super(driver);
 		}
-	
+	WebDriverWait wait = new WebDriverWait (driver, 25);
 
 	By AddTestSession = By.xpath("//span[text()='Add Test Session']");
 	By CreateButton = By.xpath("//button[text()='Create']");	
@@ -60,12 +60,17 @@ public class TestSessionPage extends BaseActions{
 	By PopUp_DeleteSuccess = By.xpath("(//I[@class='icon icon-close-4 f-abs-all'])[1]");
 	By Copy_JSON = By.xpath("//textarea[@id='test_session_edit_data']");
 	By Verify_TestSessionPage = By.xpath("//div[text()='Test Sessions']");
+	By Edit_Success_Popup = By.xpath("//div[text()='Edit Success!']");
+	By Delete_Success_Popup = By.xpath("//div[text()='Delete Success!']");
+	
+	
+	
+	
 	
 		
 	public void linkTestSession() throws Exception {
 		try {
-			System.out.println("Inside Link_Test_Session TestSession Page Method");			
-			WebDriverWait wait = new WebDriverWait (driver, 25);			
+			System.out.println("Inside Link_Test_Session TestSession Page Method");							
 			scrollToBottomOfPage();
 			clickElement(TestSessions);			
 			System.out.println("TestSessions link clicked");			
@@ -76,8 +81,7 @@ public class TestSessionPage extends BaseActions{
 	}	
 		
 	public void btn_AddTestSession() throws Exception {
-		try {					
-			WebDriverWait wait = new WebDriverWait (driver, 30);
+		try {				
 			wait.until(ExpectedConditions.elementToBeClickable(AddTestSession));
 			clickElement(AddTestSession);				
 			System.out.println("AddTestSession button clicked");
@@ -88,8 +92,7 @@ public class TestSessionPage extends BaseActions{
 	}	
 	
 	public void dropDown_SelectCampaign() throws Exception {
-		try {					
-			WebDriverWait wait = new WebDriverWait (driver, 30);
+		try {				
 			wait.until(ExpectedConditions.elementToBeClickable(SelectCampaign));
 			clickElement(SelectCampaign);
 			System.out.println("SelectCampaign drop-down open");			
@@ -103,7 +106,6 @@ public class TestSessionPage extends BaseActions{
 	
 	public void select_ExpirationDate() throws Exception {
 		try {				
-			WebDriverWait wait = new WebDriverWait (driver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(ExpirationDate));
 			clickElement(ExpirationDate);
 			System.out.println("ExpirationDate selected");			
@@ -117,7 +119,6 @@ public class TestSessionPage extends BaseActions{
 	
 	public void select_Numbers() throws Exception {
 		try {				
-			WebDriverWait wait = new WebDriverWait (driver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(Numbers));
 			clickElement(Numbers);
 			System.out.println("Numbers selected");			
@@ -138,8 +139,7 @@ public class TestSessionPage extends BaseActions{
 	}
 	
 	public void btn_Create_Method() {		
-		try {				
-			WebDriverWait wait = new WebDriverWait (driver, 10);
+		try {			
 			wait.until(ExpectedConditions.elementToBeClickable(CreateButton));
 			clickElement(CreateButton);			
 			System.out.println("Create Button clicked......");
@@ -152,15 +152,15 @@ public class TestSessionPage extends BaseActions{
 	public void successPopUp_Method() {		
 		try {			
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-			if (!driver.findElement(Model_Msg).getText().equals("Error!")) {
-				System.out.println("Test Session Successflly Created......"+ driver.findElement(Model_Msg).getText());				
-				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			if (!driver.findElement(Model_Msg).getText().equals("Error!")) {				
+				System.out.println("Test Session Successflly Created......"+ getElementText(Model_Msg));				
+				wait.until(ExpectedConditions.elementToBeClickable(SuccessPopUp_CloseBtn));
 				clickElement(SuccessPopUp_CloseBtn);
 		    	System.out.println("SuccessPopUp_Close Btn clicked......");				
 		     }else {		    	 
-		    	 System.out.println(driver.findElement(Model_Msg).getText()+"--------"+ driver.findElement(PopUp_TxtMsg).getText());
+		    	 System.out.println(driver.findElement(Model_Msg).getText()+"--------"+ getElementText(PopUp_TxtMsg));
 		    	 Assert.fail();
-		     }					
+		     }				
 		}catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();
@@ -168,15 +168,17 @@ public class TestSessionPage extends BaseActions{
 	}
 	
 	public void edit_TestSession_Method() throws Exception {
-		try {				
-			WebDriverWait wait = new WebDriverWait (driver, 10);
+		try {			
 			wait.until(ExpectedConditions.elementToBeClickable(Edit_TestSession));
 			clickElement(Edit_TestSession);
-			System.out.println("Edit button Clicked............");
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.findElement(Copy_JSON).getText();			
+			System.out.println("Edit button Clicked............");			
+			wait.until(ExpectedConditions.elementToBeClickable(Copy_JSON));
+			Thread.sleep(1000);
+			System.out.println("JSON Data" + driver.findElement(Copy_JSON).getText());			
 			clickElement(Save_Button);
-			System.out.println("Save Button Clicked............");					
+			System.out.println("Save Button Clicked............");	
+			wait.until(ExpectedConditions.elementToBeClickable(Edit_Success_Popup));
+			System.out.println("Pop_Up......"+ getElementText(Edit_Success_Popup));
 			clickElement(SuccessPopUp_CloseBtn);
 			System.out.println("Edit Modal Save PopUp Closed Successfully............");
 		}catch (Exception e) {
@@ -186,15 +188,13 @@ public class TestSessionPage extends BaseActions{
 	}	
 	
 	public void delete_Test_Session_Method() {		
-		try {			
-			WebDriverWait wait = new WebDriverWait (driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(BtnDeleteTestSession));
+		try {				
 			clickElement(BtnDeleteTestSession);			
 			System.out.println("Delete_Test_Session Button clicked......");			
 			clickElement(PopUp_DeleteTestSeeion);
-			System.out.println("Delete_Test_Session Pop-UP's Delete Button clicked......");			
-			WebDriverWait waits = new WebDriverWait (driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(PopUp_DeleteSuccess));
+			System.out.println("Delete_Test_Session Pop-UP's Delete Button clicked......");				
+			wait.until(ExpectedConditions.elementToBeClickable(Delete_Success_Popup));
+			System.out.println("Pop_Up...." + getElementText(Delete_Success_Popup));
 			clickElement(PopUp_DeleteSuccess);
 			System.out.println("Delete_Test_Session Success Pop_UP Closed......");
 		}catch (Exception e) {

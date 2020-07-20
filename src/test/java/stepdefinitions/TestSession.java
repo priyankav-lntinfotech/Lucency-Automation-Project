@@ -22,7 +22,7 @@ private TestContext context;
 	public TestSession(TestContext context) {
 		this.context = context;
 	}
-	WebDriver driver;
+	
 	LoginPage login;
 	TestSessionPage session;
 	

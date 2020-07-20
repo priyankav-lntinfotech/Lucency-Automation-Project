@@ -57,7 +57,8 @@ private TestContext context;
 	@Then("click on Add Test Session button")
 	public void click_on_Add_Test_Session_button() throws Exception {	    
 	    try {
-	    	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	    	Thread.sleep(2000);
+	    	//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			session.btn_AddTestSession(); 	
 	    	System.out.println("Inside Add Test Session Stepdefination.....");
 	    }catch (Exception e) {
@@ -68,8 +69,7 @@ private TestContext context;
 	@Then("select Campaign and Expiration date")
 	public void select_Campaign_and_Expiration_date() throws Exception {
 		try {
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-	    	session.dropDown_SelectCampaign();
+			session.dropDown_SelectCampaign();
 		    System.out.println("Campaign selected from the drop-down list.........................");	    
 		    session.select_ExpirationDate();
 		    System.out.println("Exp Date selected from the calender..........");

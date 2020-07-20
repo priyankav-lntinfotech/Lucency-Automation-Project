@@ -1,5 +1,7 @@
 package Base;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,6 +9,9 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -74,6 +79,20 @@ public abstract class BaseActions {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		ajaxClick(element);
 	}
+	
+	
+	public JSONObject jsonReader(String string) throws IOException, ParseException {
+		FileReader reader = new FileReader(string.toString());			
+		JSONParser jsonpaser = new JSONParser();			
+		JSONObject jsonObject = (JSONObject) jsonpaser.parse(reader);
+		System.out.println(jsonObject.toJSONString());
+		return(jsonObject);
+		//driver.findElement(EnterSessionData).sendKeys(jsonObject.toJSONString());
+	}
+	
+	
+	
+	
 
 	public void clickElement(By by) {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));

@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.gson.JsonParser;
 
@@ -57,39 +59,38 @@ public class TestSessionPage extends BaseActions{
 	By PopUp_DeleteTestSeeion = By.xpath("//button[text()='Delete']");
 	By PopUp_DeleteSuccess = By.xpath("(//I[@class='icon icon-close-4 f-abs-all'])[1]");
 	By Copy_JSON = By.xpath("//textarea[@id='test_session_edit_data']");
-	
+	By Verify_TestSessionPage = By.xpath("//div[text()='Test Sessions']");
 	
 		
 	public void linkTestSession() throws Exception {
 		try {
-			System.out.println("Inside Link_Test_Session TestSession Page Method");
-			Thread.sleep(3000);
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(0,500)");				
+			System.out.println("Inside Link_Test_Session TestSession Page Method");			
+			WebDriverWait wait = new WebDriverWait (driver, 25);			
+			scrollToBottomOfPage();
 			clickElement(TestSessions);			
-			System.out.println("TestSessions link clicked");
+			System.out.println("TestSessions link clicked");			
 		}catch (Exception e) {
 			System.out.println("TestSessions link not found");
 			throw (e);
 		}
-	}
-	
+	}	
 		
 	public void btn_AddTestSession() throws Exception {
-		try {
-			//Thread.sleep(2000);
-			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-			clickElement(AddTestSession);			
+		try {					
+			WebDriverWait wait = new WebDriverWait (driver, 30);
+			wait.until(ExpectedConditions.elementToBeClickable(AddTestSession));
+			clickElement(AddTestSession);				
 			System.out.println("AddTestSession button clicked");
 		}catch (Exception e) {
 			System.out.println("AddTestSession button not found");
 			throw (e);
 		}
-	}
-	
+	}	
 	
 	public void dropDown_SelectCampaign() throws Exception {
-		try {			
+		try {					
+			WebDriverWait wait = new WebDriverWait (driver, 30);
+			wait.until(ExpectedConditions.elementToBeClickable(SelectCampaign));
 			clickElement(SelectCampaign);
 			System.out.println("SelectCampaign drop-down open");			
 			clickElement(selectCampaignValue);
@@ -97,67 +98,62 @@ public class TestSessionPage extends BaseActions{
 		}catch (Exception e) {
 			System.out.println("SelectCampaign drop-down not found");
 			throw (e);
-	}
-  }
-	
+		}
+	}	
 	
 	public void select_ExpirationDate() throws Exception {
-		try {			
+		try {				
+			WebDriverWait wait = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(ExpirationDate));
 			clickElement(ExpirationDate);
-			System.out.println("ExpirationDate selected");
+			System.out.println("ExpirationDate selected");			
 			clickElement(todayDate);
 			System.out.println("todayDate selected");
 		}catch (Exception e) {
 			System.out.println("ExpirationDate not selected");
 			throw (e);
+		}
 	}
-  }
 	
 	public void select_Numbers() throws Exception {
-		try {			
+		try {				
+			WebDriverWait wait = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(Numbers));
 			clickElement(Numbers);
 			System.out.println("Numbers selected");			
 		}catch (Exception e) {
 			System.out.println("Numbers not selected");
 			throw (e);
+		}
 	}
-  }
 	
 	public void enter_SessionData() {		
-		try {			
-			//Thread.sleep(1000);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			clickElement(EnterSessionData);
-			FileReader reader = new FileReader("Binaries/SampleJson.json");			
-			JSONParser jsonpaser = new JSONParser();			
-			JSONObject jsonObject = (JSONObject) jsonpaser.parse(reader);
-			System.out.println(jsonObject.toJSONString());
-			driver.findElement(EnterSessionData).sendKeys(jsonObject.toJSONString());			
+		try {				
+			JSONObject jsonObject = jsonReader("Binaries/SampleJson.json");
+			driver.findElement(EnterSessionData).sendKeys(jsonObject.toJSONString());
 		}catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public void btn_Create_Method() {		
-		try {			
+		try {				
+			WebDriverWait wait = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(CreateButton));
 			clickElement(CreateButton);			
 			System.out.println("Create Button clicked......");
 		}catch (Exception e) {
 			System.out.println("Create Button not clicked......");
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public void successPopUp_Method() {		
 		try {			
-			//Thread.sleep(2000);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			if (!driver.findElement(Model_Msg).getText().equals("Error!")) {
-				System.out.println("Test Session Successflly Created......"+ driver.findElement(Model_Msg).getText());
-				//Thread.sleep(1000);
+				System.out.println("Test Session Successflly Created......"+ driver.findElement(Model_Msg).getText());				
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				clickElement(SuccessPopUp_CloseBtn);
 		    	System.out.println("SuccessPopUp_Close Btn clicked......");				
@@ -168,33 +164,37 @@ public class TestSessionPage extends BaseActions{
 		}catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public void edit_TestSession_Method() throws Exception {
-		try {
-			//Thread.sleep(2000);
+		try {				
+			WebDriverWait wait = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(Edit_TestSession));
 			clickElement(Edit_TestSession);
-			Thread.sleep(1000);
-			driver.findElement(Copy_JSON).getText();
+			System.out.println("Edit button Clicked............");
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.findElement(Copy_JSON).getText();			
 			clickElement(Save_Button);
+			System.out.println("Save Button Clicked............");					
 			clickElement(SuccessPopUp_CloseBtn);
+			System.out.println("Edit Modal Save PopUp Closed Successfully............");
 		}catch (Exception e) {
 			System.out.println("");
 			throw (e);
 		}
-	}
-	
+	}	
 	
 	public void delete_Test_Session_Method() {		
-		try {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {			
+			WebDriverWait wait = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(BtnDeleteTestSession));
 			clickElement(BtnDeleteTestSession);			
 			System.out.println("Delete_Test_Session Button clicked......");			
 			clickElement(PopUp_DeleteTestSeeion);
-			System.out.println("Delete_Test_Session Pop-UP's Delete Button clicked......");
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			System.out.println("Delete_Test_Session Pop-UP's Delete Button clicked......");			
+			WebDriverWait waits = new WebDriverWait (driver, 10);
+			wait.until(ExpectedConditions.elementToBeClickable(PopUp_DeleteSuccess));
 			clickElement(PopUp_DeleteSuccess);
 			System.out.println("Delete_Test_Session Success Pop_UP Closed......");
 		}catch (Exception e) {

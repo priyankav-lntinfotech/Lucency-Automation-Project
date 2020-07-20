@@ -106,9 +106,7 @@ public class AuthenticationPage extends BaseActions{
 	}
 	
 	public void authentication_Update_Label() {
-		try {			
-			setElementText(Enter_IP_Lable, "Automation");
-			System.out.println("Label Column Cleared...............");			
+		try {								
 			setElementText(Enter_IP_Lable, "Automation");
 			System.out.println("Label Successfully Updated...............");
 		}catch (Exception e) {

@@ -1,6 +1,7 @@
 Feature: Login Feature
   This feature deals with the login functionality of Lucency Application
 
+@Login
  Scenario: Login with correct username and password
   Given Open Lucency site and navigate to login page
   When I enter email and password

@@ -1,10 +1,13 @@
 package stepdefinitions;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import context.TestContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pageobject.AuthenticationPage;
 import pageobject.LoginPage;
 
@@ -26,7 +29,7 @@ private TestContext context;
 			login = context.getPageObjectManager().getLogingPage();
 			login.doValidLogin(context.getConfigFileReader().getValidEmail(), 
 					context.getConfigFileReader().getValidPassword());
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			authentication = context.getPageObjectManager().getAuthenticationPage();
 			System.out.println("Navigate to Developer Portal page.......");
 		}catch (Exception e) {
@@ -35,10 +38,9 @@ private TestContext context;
 		}
 	}
 
-	@Then("click on Agent Pop side menu")
-	public void click_on_Agent_Pop_side_menu() {
-	   try {
-		   Thread.sleep(3000);
+	@When("User click on Agent Pop side menu")
+	public void User_click_on_Agent_Pop_side_menu() {
+	   try {		   
 		   authentication.agentPop_SideMenu_Method();
 		   System.out.println("Inside agentPop_SideMenu_Method..........");
 	   }catch (Exception e) {
@@ -58,7 +60,7 @@ private TestContext context;
 
 	@Then("click on Add Address")
 	public void click_on_Add_Address() throws Exception{
-		try {	    	
+		try {			
 	    	authentication.authentication_Add_Address_Method();
 	    	System.out.println("Add_Address Stepdefinition Method.........");
 	    }catch (Exception e) {
@@ -76,7 +78,7 @@ private TestContext context;
 	    }	    
 	}	
 
-	@Then("click on Save")
+	@And("click on Save")
 	public void click_on_Save() {
 	    try {	    	
 	    	authentication.authentication_Click_SaveButton();	    	

@@ -3,6 +3,8 @@ package pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Base.BaseActions;
 
@@ -22,6 +24,7 @@ public class AuthenticationPage extends BaseActions{
 	By Edit_IP = By.xpath("(//span[text()='Edit'])[1]");
 	By Delete_IP = By.xpath("(//span[text()='Delete'])[1]");
 	By Delete_Confirmation = By.xpath("//button[text()='Yes']");
+	By Edit_Lable = By.xpath("//input[@id='ip_address_edit_label']");
 	
 	
 	
@@ -46,9 +49,9 @@ public class AuthenticationPage extends BaseActions{
 	}
 	
 	public void authentication_Add_Address_Method() throws Exception {
-		try {
+		try {			
 			Thread.sleep(2000);
-			clickElement(Add_Address_button);
+			clickElement(Add_Address_button);			
 			System.out.println("Add_Address_button Clicked...........");
 		}catch (Exception e) {
 			System.out.println("Add_Address_button Not Found...........");
@@ -58,7 +61,7 @@ public class AuthenticationPage extends BaseActions{
 	
 	public void authentication_Enter_IP_Address() {
 		try {
-			Thread.sleep(500);			
+			wait.until(ExpectedConditions.elementToBeClickable(Enter_IP_Address));			
 			setElementText(Enter_IP_Address, "10.21.101.20");
 			System.out.println("IP_Address Entered.............");
 		}catch (Exception e) {
@@ -106,8 +109,10 @@ public class AuthenticationPage extends BaseActions{
 	}
 	
 	public void authentication_Update_Label() {
-		try {								
-			setElementText(Enter_IP_Lable, "Automation");
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(Edit_Lable));
+			clearText(Edit_Lable);
+			setElementText(Edit_Lable, "Auto");
 			System.out.println("Label Successfully Updated...............");
 		}catch (Exception e) {
 			System.out.println("Unable To Update Label........");
@@ -115,8 +120,8 @@ public class AuthenticationPage extends BaseActions{
 	}
 	
 	public void authentication_Delete_IP_Address() {
-		try {
-			Thread.sleep(500);
+		try {			
+			wait.until(ExpectedConditions.elementToBeClickable(Delete_IP));
 			clickElement(Delete_IP);
 			System.out.println("IP Successfully Deleted...............");
 		}catch (Exception e) {
@@ -125,8 +130,8 @@ public class AuthenticationPage extends BaseActions{
 	}
 	
 	public void authentication_Delete_Confirmation_PopUP() {
-		try {
-			Thread.sleep(500);
+		try {			
+			wait.until(ExpectedConditions.elementToBeClickable(Delete_Confirmation));
 			clickElement(Delete_Confirmation);
 			System.out.println("Delete_Confirmation Accepted...............");
 		}catch (Exception e) {

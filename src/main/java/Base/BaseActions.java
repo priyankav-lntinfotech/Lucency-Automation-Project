@@ -23,7 +23,7 @@ public abstract class BaseActions {
 
 	public BaseActions(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 25);
 	}
 	
 	 public WebElement findAnyElement(By locator){
@@ -79,6 +79,12 @@ public abstract class BaseActions {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
 		element.click();
 	}
+	
+	public void clearText(By by) {
+		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+		element.clear();
+	}
+	
 	
 	public void acceptConfirmationPopup() {
 		driver.switchTo().alert().accept();

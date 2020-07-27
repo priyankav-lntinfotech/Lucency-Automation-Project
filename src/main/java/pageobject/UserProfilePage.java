@@ -47,7 +47,7 @@ public class UserProfilePage extends BaseActions
 	By confirm_pswd = By.xpath("//input[@id='user_profile_edit_new_password_confirmation']");
 	
 	By cancel = By.xpath("//button[text()='Cancel']");
-	By save = By.xpath("//button[@class='f-bg-1 f-bold f-button f-c f-color-w f-h-40 f-lh-40 f-pad-1-h f-size-14 f-w-175 pure-input-1'][text()='Save']");
+	By save = By.xpath("(//BUTTON[text()='Save'])[1]");
 	
 	/* Elements on Profile page */
 	public By emailid = By.xpath("//input[@id='user_email']");
@@ -120,41 +120,36 @@ public class UserProfilePage extends BaseActions
 	public void Uploadpic() throws Exception
 	{
 		Editclick();
-		
+		wait.until(ExpectedConditions.elementToBeClickable(uploadimage));
 		driver.findElement(uploadimage).click();
-		Thread.sleep(1000);
-		
+		//Thread.sleep(1000);		
 		String absolutepath = getAbsoultepathofFile(imagepath);
 		System.out.println("File path is: "+ absolutepath);
-		setElementText(uploadfile, absolutepath);
-		
-		Thread.sleep(1000);
+		setElementText(uploadfile, absolutepath);		
+		//Thread.sleep(1000);
+		wait.until(ExpectedConditions.elementToBeClickable(savefile));
         ajaxClick(savefile);
-        System.out.println("Uploaded image");
-        
-        ajaxClick(save);
-	
+        System.out.println("Uploaded image");        
+        ajaxClick(save);	
 	}
 	
 	public void updatepassword(String pswd) throws Exception
 	{
 		Editclick();
-		
-		setElementText(old_pswd, pswd);
-		
+		wait.until(ExpectedConditions.elementToBeClickable(old_pswd));
+		setElementText(old_pswd, pswd);		
 		String newpassword = generateNewWord(3)+generateNewNumber(2)+"@"+(generateNewWord(2)).toUpperCase();
-		System.out.println("New Password is: "+ newpassword);
-		
+		System.out.println("New Password is: "+ newpassword);		
 		setElementText(new_pswd, newpassword);
-		setElementText(confirm_pswd, newpassword);
-		
-		Thread.sleep(3000);
-		ajaxClick(save);
-		
+		setElementText(confirm_pswd, newpassword);		
+		//Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(save));
+		ajaxClick(save);		
 	}
 
 	public void Editclick()
 	{
+		wait.until(ExpectedConditions.elementToBeClickable(edit));
 		ajaxClick(edit);
 	}
 }

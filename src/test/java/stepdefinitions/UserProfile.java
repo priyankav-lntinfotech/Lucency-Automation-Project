@@ -52,13 +52,10 @@ public class UserProfile
 			
 		try
 		{
-			homePage.clickonProfileIcon();
-			
-			Thread.sleep(1000);
-			
-			homePage.clickonAccountSettings();
-			
-			Thread.sleep(1000);
+			homePage.clickonProfileIcon();			
+			//Thread.sleep(1000);			
+			homePage.clickonAccountSettings();			
+			//Thread.sleep(1000);
 		    profile.verifyAccountTitle();
 		}
 		catch(Exception e)
@@ -68,43 +65,49 @@ public class UserProfile
 		}
 	}
 	
-	@When("Click on Edit icon to update user details, password, profile pic")
-	public void click_on_Edit_icon_to_update_user_details_password_profile_pic() throws Exception
-	{
-		System.out.println("Click on Edit icon to update profile");
-		Thread.sleep(1000);
+	@When("User click on Edit icon to update User details Password and Profile Pic")
+	public void user_click_on_Edit_icon_to_update_User_details_Password_and_Profile_Pic() {
+		 try {
+			    System.out.println("Click on Edit icon to update profile");
+				Thread.sleep(1000);				
+				profile.Editclick();
+				System.out.println("Open in edit mode..");			   
+		   }catch (Exception e) {
+			   System.out.println("Update User Details, Password and Profile Pic Stepdefinition Not Found............");
+		   }
+	}
+	
+	
+
+	@Then("User update the user details")
+	public void User_update_the_user_details() throws Exception {
+		try {
+			System.out.println("Click on Edit icon to update profile");
+			//Thread.sleep(1000);			
+			profile.updateprofiledetails();
+			System.out.println("Profile Info updated successfully..");			
+		}catch(Exception e) {
+			System.out.println("Update User Details Setpdefinition not found......");
+		}
+	
 		
-		profile.Editclick();
-		System.out.println("Open in edit mode..");
 	}
 
-	@Then("update user details")
-	public void update_user_details() throws Exception 
+	@And("User update the password")
+	public void User_update_the_password() throws Exception 
 	{
 		System.out.println("Click on Edit icon to update profile");
-		Thread.sleep(1000);
-		
-		profile.updateprofiledetails();
-		System.out.println("Profile Info updated successfully..");
-	}
-
-	@And("update password")
-	public void update_password() throws Exception 
-	{
-		System.out.println("Click on Edit icon to update profile");
-		Thread.sleep(1000);
-		
+		//Thread.sleep(1000);		
 		String pswd = context.getConfigFileReader().getValidPassword();
 		profile.updatepassword(pswd);
 		System.out.println("Password updated successfully..");
 	}
 
-	@And("upload Profile picture")
-	public void upload_Profile_picture() throws Exception 
+	@And("Upload the Profile picture")
+	public void upload_the_Profile_picture() throws Exception 
 	{
 		System.out.println("Click on Edit icon to update Profile image");
-		Thread.sleep(1000);
-				
+		//Thread.sleep(1000);				
 		profile.Uploadpic();
 		System.out.println("Profile Image uploaded successfully..");
 	}

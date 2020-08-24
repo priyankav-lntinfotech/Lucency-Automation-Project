@@ -2,10 +2,10 @@ package managers;
 
 import org.openqa.selenium.WebDriver;
 
-import pageobject.APIKeysPage;
 import pageobject.CommonPageElements;
 import pageobject.HomePage;
 import pageobject.LoginPage;
+import pageobject.UsersPage;
 
 
 
@@ -16,7 +16,8 @@ public class PageObjectManager {
 	private WebDriver driver;
 
 	private CommonPageElements commonPageElement;
-	private APIKeysPage api;
+	private UsersPage user;
+	
 	
 	
 	
@@ -38,9 +39,14 @@ public class PageObjectManager {
 		return (commonPageElement == null) ? commonPageElement =  new CommonPageElements(driver) : commonPageElement;
 	}
 	
-	public APIKeysPage getAPIKeysPage() {
-		return (api == null) ? api = new APIKeysPage(driver) : api;
+	
+	public UsersPage getUsersPage() {
+		return (user == null) ? user = new UsersPage(driver) : user;
 	}
+	
+	/*public APIKeysPage getAPIKeysPage() {
+		return (api == null) ? api = new APIKeysPage(driver) : api;
+	}*/
 	
 	/*public AuthenticationPage getAuthenticationPage() {
 		return (ipAddress == null) ? ipAddress = new AuthenticationPage(driver) : ipAddress;

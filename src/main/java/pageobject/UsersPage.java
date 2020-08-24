@@ -23,6 +23,7 @@ public class UsersPage  extends BaseActions {
 	By re_EnterEmail = By.xpath("//input[@id='user_add_email_confirmation']");
 	By ContactNumber = By.xpath("//input[@id='user_add_phone']");
 	By Save_Button = By.xpath("(//button[text()='Save'])[1]");
+	By close_success_popup = By.xpath("//I[@class='icon icon-close-4 f-abs-all']");
 	By Edit_Button = By.xpath("(//span[@class='f-title f-underline'][text()='Edit'])[1]");
 	By Delete_Button = By.xpath("(//span[@class='f-title f-underline'][text()='Delete'])[1]");
 	By Edit_FirstName = By.xpath("//input[@id='user_edit_first_name']");
@@ -116,18 +117,30 @@ public class UsersPage  extends BaseActions {
 	public void click_Save_Button_Method() throws Exception {
 		try {
 			clickElement(Save_Button);
-			System.out.println("Save Button Successfully Clicked................");			
+			System.out.println("Save Button Successfully Clicked................");					
 		}catch (Exception e) {
 			System.out.println("Save Button Not Clicked.........................");
 			throw (e);
 		}
 	}
 	
+	public void click_Close_Success_Popup_Method() throws Exception {
+		try {
+			clickElement(close_success_popup);
+			System.out.println("Success Popup closed Successfully................");					
+		}catch (Exception e) {
+			System.out.println("Success popup not found.........................");
+			throw (e);
+		}
+	}	
+	
 	public void click_Edit_Button_Method() throws Exception {
 		try {
 			clickElement(Edit_Button);
 			System.out.println("Edit Button Successfully Clicked................");	
-			
+			clearText(Edit_FirstName);
+			setElementText(Edit_FirstName, "ABC");
+			clickElement(Save_Button);
 		}catch (Exception e) {
 			System.out.println("Edit Button Not Clicked.........................");
 			throw (e);

@@ -72,7 +72,7 @@ private TestContext context;
 		}
 	}
 	
-	@And("Click on Save button")
+	@Then("Click on Save button")
 	public void Click_on_Save_button() throws Exception {
 		try {
 			users.click_Save_Button_Method();	
@@ -84,7 +84,7 @@ private TestContext context;
 	}
 	
 
-	@Then("Edit the user")
+	@And("Edit the user")
 	public void edit_the_user() throws Exception {
 		try {
 			users.click_Edit_Button_Method();
@@ -94,9 +94,15 @@ private TestContext context;
 		}
 	}
 
-	/*@And("Delete that user")
-	public void delete_that_user() {
-	    
-	}*/
+	@Then("Delete that user")
+	public void delete_that_user() throws Exception {
+		try {
+			users.delete_Users_Method();
+			users.delete_confirmation_Method();
+		}catch (Exception e) {
+			System.out.println("Unable to find Delete User Stepdefinition............");
+			throw e;
+		}
+	}
 
 }
